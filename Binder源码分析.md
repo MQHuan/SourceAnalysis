@@ -1051,6 +1051,7 @@ enum {
     BINDER_TYPE_FD      = B_PACK_CHARS('f', 'd', '*', B_TYPE_LARGE),
 };
 ```
+
 下面这段宏定义则是在 `ioctl` 函数调用时可用的具体命令。
 
 ```c
@@ -1061,6 +1062,8 @@ enum {
 #define BINDER_SET_CONTEXT_MGR      _IOW('b', 7, int)
 #define BINDER_THREAD_EXIT      _IOW('b', 8, int)
 #define BINDER_VERSION          _IOWR('b', 9, struct binder_version)
+
+第一个参数是魔数：用于区分不同的设备驱动ioctl命令  第二个参数是序列号：去区分命令的命令顺序号，第三个是变量型：变量型使用 arg 变量指定传送的数据大小
 ```
 在 [BinderDriverReturnProtocol](https://github.com/xdtianyu/android-msm-hammerhead-3.4-marshmallow/blob/master/drivers/staging/android/binder.h#L166) 和 [BinderDriverCommandProtocol](https://github.com/xdtianyu/android-msm-hammerhead-3.4-marshmallow/blob/master/drivers/staging/android/binder.h#L254) 中 则分别定义了 客户端调用 和 服务端 返回的命令。
 
